@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  apiKey: "AIzaSyBNnLEFvspp1XIX1b23lVtxuVyWuP-ZwE0",
   authDomain: "unit-test-social-app.firebaseapp.com",
   projectId: "unit-test-social-app",
   storageBucket: "unit-test-social-app.appspot.com",
