@@ -1,15 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-import LogoImage from "../assets/images/logo.png";
+import LogoImage from "../../assets/images/logo.png";
 import {
   Home,
   Explore,
   Subscriptions,
-  VideoLibrary,
   History,
   LibraryMusic,
   SportsBasketball,
-  SportsEsports,
   MovieCreation,
   Article,
   LiveTv,
@@ -23,75 +20,12 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Button } from "antd";
+import {Container, Wrapper, Logo, Item, Hr, Title, Login ,Img} from './MenuStyled'
 
-const Container = styled.div`
-  flex: 1;
-  background-color: ${({ theme }) => {
-    console.log(theme);
-
-    return theme.bgLighter;
-  }};
-  height: 100vh;
-
-  color: ${({ theme }) => theme.text};
-  font-size: 14px;
-  position: sticky;
-  top: 0;
-`;
-const Wrapper = styled.div`
-  padding: 18px 26px;
-`;
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: bold;
-  margin-bottom: 25px;
-`;
-
-const Img = styled.img`
-  height: 25px;
-`;
-
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  padding: 7.5px 0px;
-  &:hover {
-    background-color: ${({ theme }) => theme.soft};
-  }
-`;
-
-const Hr = styled.hr`
-  margin: 15px 0px;
-  border: 0.5px solid ${({ theme }) => theme.soft};
-`;
-
-const Login = styled.div``;
-const Button = styled.button`
-  padding: 5px 15px;
-  background-color: transparent;
-  border: 1px solid #3ea6ff;
-  color: #3ea6ff;
-  border-radius: 3px;
-  font-weight: 500;
-  margin-top: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
-
-const Title = styled.h2`
-  font-size: 14px;
-  font-weight: 500;
-  color: #aaaaaa;
-  margin-bottom: 20px;
-`;
-
-const Menu = ({ darkMode, setDarkMode }) => {
+const Menu = () => {
+  const { t } = useTranslation();
   const { currentUser } = useSelector((state) => state.user);
 
   return (
@@ -105,12 +39,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
         </Link>
         <Item>
           <Home />
-          Home
+          {t("menu.home")}
         </Item>
         <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
             <Explore />
-            Explore
+            {t("menu.explore")}
           </Item>
         </Link>
         <Link
@@ -119,74 +53,77 @@ const Menu = ({ darkMode, setDarkMode }) => {
         >
           <Item>
             <Subscriptions />
-            Subscriptions
+            {t("menu.subscriptions")}
           </Item>
         </Link>
         <Hr />
+
         <Item>
           <LibraryMusic />
-          Library
+          {t("menu.library")}
         </Item>
+
         <Item>
           <History />
-          History
+          {t("menu.history")}
         </Item>
         <Hr />
         {!currentUser && (
           <>
             <Login>
-              Sign in to like videos, comment, and subscribe.
+              {t("menu.remind-login")}
               <Link to="signin" style={{ textDecoration: "none" }}>
-                <Button>
+                <Button color="gradient">
                   <AccountCircleOutlined />
-                  SIGN IN
+                  {t("menu.signin")}
                 </Button>
               </Link>
             </Login>
             <Hr />
           </>
         )}
-        <Title>BEST OF VIDSHARE</Title>
-        <Item>
-          <LibraryMusic />
-          Music
-        </Item>
+        <Title> {t("menu.categories")}</Title>
+        <Link
+          to="categories/music"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <LibraryMusic />
+            {t("menu.music")}
+          </Item>
+        </Link>
         <Item>
           <SportsBasketball />
-          Sports
+          {t("menu.sport")}
         </Item>
         <Item>
           <GamesOutlined />
-          Gaming
+          {t("menu.gaming")}
         </Item>
         <Item>
           <MovieCreation />
-          Movies
+          {t("menu.movies")}
         </Item>
         <Item>
           <Article />
-          News
+          {t("menu.help")}
         </Item>
         <Item>
           <LiveTv />
-          Live
+          {t("menu.live")}
         </Item>
         <Hr />
         <Item>
           <Settings />
-          Settings
+          {t("menu.settings")}
         </Item>
         <Item>
           <Report />
-          Report
+          {t("menu.report")}
         </Item>
         <Item>
           <Flag />
-          Help
-        </Item>
-        <Item onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? <DarkMode /> : <LightMode />}
-          {darkMode ? "Dark" : "Light"} Mode
+          {t("menu.help")}
         </Item>
       </Wrapper>
     </Container>

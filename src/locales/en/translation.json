@@ -1,0 +1,24 @@
+{
+  "menu": {
+    "search": "Search",
+    "home": "Home",
+    "explore": "Explore",
+    "subscriptions": "Subscriptions",
+    "library": "Library",
+    "history": "History",
+    "remind-login": "Sign in to like videos, comment, and subscribe.",
+    "signin": "SIGN IN",
+    "categories": "CATEGORIES",
+    "music": "Music",
+    "sport": "Sports",
+    "gaming": "Gaming",
+    "movies": "Movies",
+    "news": "News",
+    "live": "Live",
+    "settings": "Settings",
+    "report": "Report",
+    "help": "Help",
+    "dark-mode": "Dark Mode",
+    "light-mode": "Light Mode"
+  }
+}

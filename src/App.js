@@ -1,15 +1,14 @@
 import { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import Menu from "./components/Menu";
-import Navbar from "./components/Navbar";
+import Menu from "./components/Menu/Menu";
+import Navbar from "./components/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./utils/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Video from "./pages/Video";
-import SignIn from "./pages/SignIn";
-import Search from "./pages/Search";
+import Home from "./pages/Home/Home";
+import Video from "./pages/Video/Video";
+import SignIn from "./pages/Signin/SignIn";
+import Search from "./pages/Search/Search";
 import { useSelector } from "react-redux";
-
 
 const Container = styled.div`
   display: flex;
@@ -29,17 +28,24 @@ function App() {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <Container>
+      <Container className="social-app">
         <BrowserRouter>
-          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Menu />
           <Main>
-            <Navbar />
+            <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
             <Wrapper>
               <Routes>
                 <Route path="/">
                   <Route index element={<Home type="random-videos" />} />
                   <Route path="trends" element={<Home type="trend-videos" />} />
-                  <Route path="subscriptions" element={<Home type="sub-videos" />} />
+                  <Route
+                    path="subscriptions"
+                    element={<Home type="sub-videos" />}
+                  />
+                  <Route
+                    path="categories/music"
+                    element={<Home type="tags?tags=music" />}
+                  />
                   <Route path="search" element={<Search />} />
                   <Route
                     path="signin"
@@ -48,6 +54,7 @@ function App() {
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
                   </Route>
+                  <Route path="*" element={<>Page Not found</>}></Route>
                 </Route>
               </Routes>
             </Wrapper>

@@ -1,0 +1,24 @@
+{
+  "menu": {
+    "search": "Tìm kiếm",
+    "home": "Trang chủ",
+    "explore": "Khám phá",
+    "subscriptions": "Yêu thích",
+    "library": "Thư viện",
+    "history": "Lịch sử",
+    "remind-login": "Đăng nhập để đăng ký kênh, thích và bình luận video.",
+    "signin": "ĐĂNG NHẬP",
+    "categories": "Chủ đề",
+    "music": "Ca nhạc",
+    "sport": "Thể thao",
+    "gaming": "Gaming",
+    "movies": "Phim ảnh",
+    "news": "Tin tức",
+    "live": "Trực tiếp",
+    "settings": "Cài đặt",
+    "report": "Báo cáo",
+    "help": "Trợ giúp",
+    "dark-mode": "Nền tối",
+    "light-mode": "Nền sáng"
+  }
+}

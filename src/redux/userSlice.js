@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   currentUser: null,
   loading: false,
   error: false,
 };
+
+
 
 export const userSlice = createSlice({
   name: "user",
@@ -22,20 +25,22 @@ export const userSlice = createSlice({
       state.error = true;
     },
     logout: (state) => {
+      storage.removeItem('persist:root')
       state.currentUser = null;
       state.loading = false;
       state.error = false;
+   
     },
     subscription: (state, action) => {
-      if (state.currentUser.subscribedUsers.includes(action.payload)) {
-        state.currentUser.subscribedUsers.splice(
-          state.currentUser.subscribedUsers.findIndex(
+      if (state?.currentUser?.subscribedUser?.includes(action.payload)) {
+        state?.currentUser?.subscribedUser?.splice(
+          state.currentUser?.subscribedUser?.findIndex(
             (channelId) => channelId === action.payload
           ),
           1
         );
       } else {
-        state.currentUser.subscribedUsers.push(action.payload);
+        state?.currentUser?.subscribedUser?.push(action.payload);
       }
     },
   },
