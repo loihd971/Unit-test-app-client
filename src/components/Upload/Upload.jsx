@@ -34,59 +34,63 @@ const Upload = ({ setIsModalVisible, isModalVisible }) => {
       value: "live",
     },
   ]);
-  const [curImg, setCurImg] = useState(undefined);
-  const [curVideo, setCurVideo] = useState(undefined);
+  const [img, setImg] = useState(undefined);
+  const [video, setVideo] = useState(undefined);
+  const [inputs, setInputs] = useState({});
   const [imgPerc, setImgPerc] = useState(0);
   const [videoPerc, setVideoPerc] = useState(0);
   const navigate = useNavigate();
 
+  const uploadFile = (file, urlType) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        urlType === "imgUrl"
+          ? setImgPerc(Math.round(progress))
+          : setVideoPerc(Math.round(progress));
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+            break;
+        }
+      },
+      (error) => {},
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setInputs((prev) => {
+            return { ...prev, [urlType]: downloadURL };
+          });
+        });
+      }
+    );
+  };
+
+  useEffect(() => {
+    video && uploadFile(video, "videoUrl");
+  }, [video]);
+
+  useEffect(() => {
+    img && uploadFile(img, "imgUrl");
+  }, [img]);
+
   const onSubmit = async (value) => {
+  
     try {
       const { video, img, ...rest } = value;
-      const firebaseData = {};
-      const uploadFile = (file, urlType) => {
-        const storage = getStorage(app);
-        const fileName = new Date().getTime() + file.name;
-        const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            urlType === "imgUrl"
-              ? setImgPerc(Math.round(progress))
-              : setVideoPerc(Math.round(progress));
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-              default:
-                break;
-            }
-          },
-          (error) => {},
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              firebaseData["urlType"] = downloadURL;
-            });
-          }
-        );
-      };
-
-      await uploadFile(curVideo, "videoUrl");
-      console.log(firebaseData);
-      await uploadFile(curImg, "imgUrl");
-      console.log(firebaseData);
-      const res =
-        firebaseData &&
-        firebaseData?.includes("videoUrl") &&
-        firebaseData?.includes("imgUrl") &&
-        (await axios.post("/videos", { ...rest, ...firebaseData }));
+      console.log(inputs)
+      const res = await axios.post("/videos", { ...rest, ...inputs });
       res.status === 200 && navigate(`/video/${res.data._id}`);
       setIsModalVisible(false);
     } catch (error) {}
@@ -145,7 +149,7 @@ const Upload = ({ setIsModalVisible, isModalVisible }) => {
             <UploadContainer
               type="file"
               accept="video/*"
-              onChange={(e) => setCurVideo(e.target.files[0])}
+              onChange={(e) => setVideo(e.target.files[0])}
             />
           </FormContainer.Item>
         )}
@@ -160,7 +164,7 @@ const Upload = ({ setIsModalVisible, isModalVisible }) => {
             <UploadContainer
               type="file"
               accept="image/*"
-              onChange={(e) => setCurImg(e.target.files[0])}
+              onChange={(e) => setImg(e.target.files[0])}
             />
           </FormContainer.Item>
         )}

@@ -39,6 +39,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           />
         </Col>
         <Col className="nav-right">
+          <VideoCallOutlinedIcon onClick={() => setIsModalVisible(true)} />
           <Popover
             placement="bottomLeft"
             content={
@@ -67,9 +68,6 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           >
             {currentUser ? (
               <User>
-                <VideoCallOutlinedIcon
-                  onClick={() => setIsModalVisible(true)}
-                />
                 <Avatar src={currentUser.img} />
                 {currentUser.name}
               </User>

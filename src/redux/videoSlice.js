@@ -6,7 +6,7 @@ const initialState = {
   error: false,
 };
 
-export const videoSlice = createSlice({
+ const videoSlice = createSlice({
   name: "video",
   initialState,
   reducers: {
