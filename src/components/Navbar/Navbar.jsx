@@ -9,7 +9,7 @@ import { logout } from "../../redux/userSlice";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { Row, Col, Switch, Button, Input, Popover } from "antd";
+import { Row, Col, Switch, Button, Input } from "antd";
 import { NavbarContainer, User, Avatar } from "./NavbarStyled";
 
 const Navbar = ({ darkMode, setDarkMode }) => {
@@ -40,46 +40,38 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         </Col>
         <Col className="nav-right">
           <VideoCallOutlinedIcon onClick={() => setIsModalVisible(true)} />
-          <Popover
-            placement="bottomLeft"
-            content={
-              <>
-                {" "}
-                <Switch
-                  defaultChecked
-                  color="success"
-                  onChange={(checked) => {
-                    i18n.changeLanguage(checked ? "en" : "vi");
-                  }}
-                />
-                <Switch
-                  defaultChecked
-                  color="success"
-                  onChange={(checked) => {
-                    setDarkMode(checked);
-                  }}
-                />
-                {currentUser && (
-                  <span onClick={() => handleLogout()}>Logout</span>
-                )}
-              </>
-            }
-            trigger="click"
-          >
-            {currentUser ? (
+
+          <Switch
+            defaultChecked
+            color="success"
+            onChange={(checked) => {
+              i18n.changeLanguage(checked ? "en" : "vi");
+            }}
+          />
+          <Switch
+            defaultChecked
+            color="success"
+            onChange={(checked) => {
+              setDarkMode(checked);
+            }}
+          />
+
+          {currentUser ? (
+            <>
               <User>
                 <Avatar src={currentUser.img} />
                 {currentUser.name}
               </User>
-            ) : (
-              <Link to="signin" style={{ textDecoration: "none" }}>
-                <Button color="gradient">
-                  <AccountCircleOutlinedIcon />
-                  {t("menu.signin")}
-                </Button>
-              </Link>
-            )}
-          </Popover>
+              <User onClick={() => handleLogout()}>/ Logout</User>
+            </>
+          ) : (
+            <Link to="signin" style={{ textDecoration: "none" }}>
+              <Button className="btn-login">
+                <AccountCircleOutlinedIcon />
+                {t("menu.signin")}
+              </Button>
+            </Link>
+          )}
         </Col>
       </Row>
 

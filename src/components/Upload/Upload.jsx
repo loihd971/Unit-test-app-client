@@ -86,10 +86,8 @@ const Upload = ({ setIsModalVisible, isModalVisible }) => {
   }, [img]);
 
   const onSubmit = async (value) => {
-  
     try {
       const { video, img, ...rest } = value;
-      console.log(inputs)
       const res = await axios.post("/videos", { ...rest, ...inputs });
       res.status === 200 && navigate(`/video/${res.data._id}`);
       setIsModalVisible(false);

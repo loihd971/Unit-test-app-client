@@ -73,7 +73,7 @@ const Menu = () => {
             <Login>
               {t("menu.remind-login")}
               <Link to="signin" style={{ textDecoration: "none" }}>
-                <Button color="gradient">
+                <Button className="btn-login">
                   <AccountCircleOutlined />
                   {t("menu.signin")}
                 </Button>

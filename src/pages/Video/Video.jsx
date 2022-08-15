@@ -51,7 +51,6 @@ const Video = () => {
           `/users/detail/${videoRes.data.userId}`
         );
         setChannel(channelRes.data);
-        console.log(videoRes.data);
         dispatch(fetchSuccess(videoRes.data));
       } catch (err) {}
     };
