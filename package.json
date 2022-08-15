@@ -26,6 +26,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
+    "redux-mock-store": "^1.5.4",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.5",
     "timeago.js": "^4.0.2",
@@ -60,5 +61,8 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
     ]
+  },
+  "devDependencies": {
+    "msw": "^0.44.2"
   }
 }

@@ -15,7 +15,7 @@ const Comment = ({ comment }) => {
   }, [comment.userId]);
 
   return (
-    <Container>
+    <Container data-testid="child-comment">
       <Avatar src={channel.img} />
       <Details>
         <Name>

@@ -9,20 +9,17 @@ import Video from "./pages/Video/Video";
 import SignIn from "./pages/Signin/SignIn";
 import Search from "./pages/Search/Search";
 import { useSelector } from "react-redux";
+import { Main } from "./pages/Home/HomeStyled";
 
 const Container = styled.div`
   display: flex;
 `;
 
-const Main = styled.div`
-  flex: 7;
-  background-color: ${({ theme }) => theme.bg};
-`;
 const Wrapper = styled.div`
   padding: 22px 96px;
 `;
 
-function App() {
+const App = () => {
   const [darkMode, setDarkMode] = useState(true);
   const { currentUser } = useSelector((state) => state.user);
 
@@ -63,6 +60,6 @@ function App() {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

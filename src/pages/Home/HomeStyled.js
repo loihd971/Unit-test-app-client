@@ -5,3 +5,8 @@ export const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 `;
+
+export const Main = styled.div`
+  flex: 7;
+  background-color: ${({ theme }) => theme.bg};
+`;
