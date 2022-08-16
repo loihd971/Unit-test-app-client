@@ -21,27 +21,33 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   const { currentUser } = useSelector((state) => state.user);
 
   const handleLogout = () => {
-    axios.post("/auth/signout");
     dispatch(logout());
+    axios.post("/auth/signout");
+    navigate("/signin");
   };
   return (
-    <NavbarContainer>
+    <NavbarContainer data-testid="nav-container">
       <Row gap={1} className="nav-wrapper">
         <Col className="nav-left">
           <Input
+            data-testid="input-icon"
             className="input-video__search"
             allowClear
             placeholder={t("menu.search")}
             onChange={(e) => setQ(e.target.value)}
             suffix={
-              <SearchOutlinedIcon onClick={() => navigate(`/search?q=${q}`)} />
+              <SearchOutlinedIcon
+                data-testid="search-icon"
+                onClick={() => navigate(`/search?q=${q}`)}
+              />
             }
           />
         </Col>
         <Col className="nav-right">
-          <VideoCallOutlinedIcon onClick={() => setIsModalVisible(true)} />
+          <VideoCallOutlinedIcon data-testid="upload-video-icon" onClick={() => setIsModalVisible(true)} />
 
           <Switch
+          data-testid="language-switcher"
             defaultChecked
             color="success"
             onChange={(checked) => {
@@ -49,6 +55,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             }}
           />
           <Switch
+             data-testid="theme-switcher"
             defaultChecked
             color="success"
             onChange={(checked) => {

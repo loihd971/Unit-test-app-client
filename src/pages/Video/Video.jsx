@@ -88,7 +88,7 @@ const Video = () => {
             {moment(currentVideo?.createdAt).fromNow()}
           </Info>
           <Buttons>
-            <Button onClick={handleLike}>
+            <Button data-testid="btn-like" onClick={handleLike}>
               {currentVideo?.likes?.includes(currentUser?._id) ? (
                 <ThumbUpIcon />
               ) : (
@@ -96,7 +96,7 @@ const Video = () => {
               )}{" "}
               {currentVideo?.likes?.length}
             </Button>
-            <Button onClick={handleDislike}>
+            <Button data-testid="btn-dislike" onClick={handleDislike}>
               {currentVideo?.dislikes?.includes(currentUser?._id) ? (
                 <ThumbDownIcon />
               ) : (
@@ -122,7 +122,7 @@ const Video = () => {
               <Description>{currentVideo?.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
-          <Subscribe onClick={handleSub}>
+          <Subscribe data-testid="btn-toggle-subscriber" onClick={handleSub}>
             {currentUser?.subscribedUser?.includes(channel._id)
               ? "SUBSCRIBED"
               : "SUBSCRIBE"}

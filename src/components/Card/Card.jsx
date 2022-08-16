@@ -27,6 +27,7 @@ const Card = ({ type, video }) => {
     <Link
       to={{ pathname: `/video/${video._id}` }}
       style={{ textDecoration: "none" }}
+      data-testid="child-card"
     >
       <Container type={type}>
         <Image type={type} src={video.imgUrl} />
